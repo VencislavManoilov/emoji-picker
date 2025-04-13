@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const Authorization = require('./middleware/Authorization');
 require('dotenv').config();
 
 const app = express();
@@ -10,7 +11,7 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Store your API key in a .e
 
 app.use(express.json());
 
-app.get('/pick', async (req, res) => {
+app.get('/pick', Authorization, async (req, res) => {
   try {
     const prompt = req.query.prompt || 'Suggest an emoji for happiness';
 
