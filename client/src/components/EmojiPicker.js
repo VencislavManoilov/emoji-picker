@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './styles.css';
 
+const URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 function EmojiPicker({ onCopy }) {
   const [prompt, setPrompt] = useState('');
   const [result, setResult] = useState('');
@@ -14,7 +16,7 @@ function EmojiPicker({ onCopy }) {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/pick?prompt=${encodeURIComponent(prompt)}`, {
+      const response = await fetch(URL+`/pick?prompt=${encodeURIComponent(prompt)}`, {
         headers: {
           'Authorization': token
         }

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './styles.css';
 
+const URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 function Login({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -12,7 +14,7 @@ function Login({ onLoginSuccess }) {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:8080/login', {
+      const response = await fetch(URL+'/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -4,6 +4,8 @@ import Login from './components/Login';
 import EmojiPicker from './components/EmojiPicker';
 import Notification from './components/Notification';
 
+const URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -20,7 +22,7 @@ function App() {
         return;
       }
 
-      const response = await fetch('http://localhost:8080/me', {
+      const response = await fetch(URL+'/me', {
         headers: {
           'Authorization': token
         }
