@@ -9,8 +9,6 @@ services:
       - "8080:8080"
     volumes:
       - ./server:/app
-    environment:
-      - NODE_ENV=development
 
   client:
     build:
@@ -20,7 +18,5 @@ services:
       - "3000:3000"
     volumes:
       - ./client:/app
-    environment:
-      - NODE_ENV=development
     depends_on:
       - server
