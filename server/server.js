@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const Authorization = require('./middleware/Authorization');
 require('dotenv').config();
 
@@ -11,6 +12,11 @@ const OPENAI_API_KEY = process.env.OPENAI_API_KEY; // Store your API key in a .e
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Add CORS middleware
+app.use(cors({
+  origin: '*'
+}));
 
 app.get('/', (req, res) => {
   res.status(200).json({ message: 'Welcome to the Emoji Picker API!', version: '1.0.0' });
@@ -46,6 +52,10 @@ app.get('/pick', Authorization, async (req, res) => {
     }
     res.status(500).json({ error: 'Failed to fetch completion from GPT-4o' });
   }
+});
+
+app.get('/me', Authorization, (req, res) => {
+  res.status(200).json({ authenticated: true });
 });
 
 app.post("/login", (req, res) => {
