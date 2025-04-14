@@ -25,12 +25,11 @@ app.get('/', (req, res) => {
 app.get('/pick', Authorization, async (req, res) => {
   try {
     const prompt = req.query.prompt || 'Suggest an emoji for suspicious';
-    const number = req.query.number || 3;
-    const auto = req.query.auto || false;
-    const autoPrompt = auto ? 
+    const count = req.query.count || 3;
+    const autoPrompt = count == "auto" ? 
       `Return as many emojis so they best explain/suit the user's description! No spacing, no punctuation, just emoji`
       :
-      `Return ${number} emojis that best suits the user's description! No spacing, no punctuation, just emoji`;
+      `Return ${count} emojis that best suits the user's description! No spacing, no punctuation, just emoji`;
 
     const response = await axios.post(
       OPENAI_API_URL,
