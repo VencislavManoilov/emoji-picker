@@ -86,6 +86,23 @@
   font-weight: 600;
 }
 
+.count-selector {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.count-selector label {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  cursor: pointer;
+}
+
+.count-selector input[type="radio"] {
+  cursor: pointer;
+}
+
 @media (max-width: 640px) {
   .container {
     padding: 1.5rem;

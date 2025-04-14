@@ -8,6 +8,7 @@ function EmojiPicker({ onCopy }) {
   const [result, setResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [emojiCount, setEmojiCount] = useState("3");
   const textareaRef = useRef(null);
 
   const selectTextareaContent = () => {
@@ -31,7 +32,7 @@ function EmojiPicker({ onCopy }) {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(URL+`/pick?prompt=${encodeURIComponent(prompt)}`, {
+      const response = await fetch(URL+`/pick?prompt=${encodeURIComponent(prompt)}&count=${emojiCount}`, {
         headers: {
           'Authorization': token
         }
@@ -85,6 +86,35 @@ function EmojiPicker({ onCopy }) {
             disabled={isLoading}
             autoFocus
           />
+          <div className="count-selector">
+            <label>
+              <input
+                type="radio"
+                value="1"
+                checked={emojiCount === '1'}
+                onChange={(e) => setEmojiCount(e.target.value)}
+              />
+              1 emoji
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="3"
+                checked={emojiCount === '3'}
+                onChange={(e) => setEmojiCount(e.target.value)}
+              />
+              3 emojis
+            </label>
+            <label>
+              <input
+                type="radio"
+                value="auto"
+                checked={emojiCount === 'auto'}
+                onChange={(e) => setEmojiCount(e.target.value)}
+              />
+              Auto
+            </label>
+          </div>
         </div>
         {error && <div className="error">{error}</div>}
         <button type="submit" className="button" disabled={isLoading}>
