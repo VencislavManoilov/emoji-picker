@@ -24,14 +24,20 @@ app.get('/', (req, res) => {
 
 app.get('/pick', Authorization, async (req, res) => {
   try {
-    const prompt = req.query.prompt || 'Suggest an emoji for happiness';
+    const prompt = req.query.prompt || 'Suggest an emoji for suspicious';
+    const number = req.query.number || 3;
+    const auto = req.query.auto || false;
+    const autoPrompt = auto ? 
+      `Return as many emojis so they best explain/suit the user's description! No spacing, no punctuation, just emoji`
+      :
+      `Return ${number} emojis that best suits the user's description! No spacing, no punctuation, just emoji`;
 
     const response = await axios.post(
       OPENAI_API_URL,
       {
         model: 'gpt-4o',
         messages: [
-            { role: 'system', content: "Return 3 emojis that best suits the user's description! No spacing, no punctuation, just emoji" },
+            { role: 'system', content: autoPrompt },
             { role: 'user', content: prompt }
         ],
         max_tokens: 100,
