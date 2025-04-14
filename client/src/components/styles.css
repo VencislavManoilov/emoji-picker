@@ -30,6 +30,13 @@
 .copy-button {
   padding: 0.5rem 1rem;
   font-size: 0.875rem;
+  background-color: transparent;
+  fill: #4a5568;
+  border-radius: 100px;
+}
+
+.copy-button:hover {
+  background-color: #e2e8f0;
 }
 
 .loading-dots {
@@ -66,7 +73,7 @@
   position: fixed;
   top: 24px;
   margin: 0 auto;
-  transform: translateY(-100%) translateX(0);
+  transform: translateY(-100%) translateX(0) rotate3d(1, 0, 0, 360deg);
   background: #10b981;
   color: white;
   padding: 12px 24px;
@@ -87,7 +94,7 @@
 }
 
 .notification-visible {
-  transform: translateY(0) translateX(0);
+  transform: translateY(0) translateX(0) rotate3d(1, 0, 0, 0deg);
   opacity: 1;
 }
 
