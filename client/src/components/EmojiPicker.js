@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './styles.css';
 
 const URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
@@ -8,6 +8,21 @@ function EmojiPicker({ onCopy }) {
   const [result, setResult] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const textareaRef = useRef(null);
+
+  const selectTextareaContent = () => {
+    if (textareaRef.current) {
+      textareaRef.current.select();
+    }
+  };
+
+  useEffect(() => {
+    if (result) {
+      setTimeout(() => {
+        selectTextareaContent();
+      }, 100);
+    }
+  }, [result]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +67,7 @@ function EmojiPicker({ onCopy }) {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <textarea
+            ref={textareaRef}
             className="input textarea"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
