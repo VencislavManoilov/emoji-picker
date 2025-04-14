@@ -61,6 +61,15 @@ function EmojiPicker({ onCopy }) {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      if (!e.shiftKey) {
+        e.preventDefault();
+        handleSubmit(e);
+      }
+    }
+  };
+
   return (
     <div className="emoji-picker container">
       <h2>Emoji Picker</h2>
@@ -71,7 +80,8 @@ function EmojiPicker({ onCopy }) {
             className="input textarea"
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            placeholder="Describe the emoji you want"
+            onKeyDown={handleKeyDown}
+            placeholder="Describe the emoji you want (Press Enter to submit, Shift+Enter for new line)"
             disabled={isLoading}
             autoFocus
           />
