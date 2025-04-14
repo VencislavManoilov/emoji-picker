@@ -48,6 +48,7 @@ function Login({ onLoginSuccess }) {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
             disabled={isLoading}
+            autoFocus
           />
         </div>
         {error && <div className="error">{error}</div>}

@@ -57,6 +57,7 @@ function EmojiPicker({ onCopy }) {
             onChange={(e) => setPrompt(e.target.value)}
             placeholder="Describe the emoji you want"
             disabled={isLoading}
+            autoFocus
           />
         </div>
         {error && <div className="error">{error}</div>}
