@@ -6,7 +6,14 @@ function Notification({ message }) {
 
   useEffect(() => {
     setIsVisible(true);
-    return () => setIsVisible(false);
+    const timer = setTimeout(() => {
+      setIsVisible(false);
+    }, 2000);
+
+    return () => {
+      clearTimeout(timer);
+      setIsVisible(false);
+    };
   }, []);
 
   return (
