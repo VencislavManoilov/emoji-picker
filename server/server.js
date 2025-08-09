@@ -34,12 +34,11 @@ app.get('/pick', Authorization, async (req, res) => {
     const response = await axios.post(
       OPENAI_API_URL,
       {
-        model: 'gpt-4o',
+        model: 'gpt-5-nano',
         messages: [
             { role: 'system', content: autoPrompt },
             { role: 'user', content: prompt }
         ],
-        max_tokens: 100,
       },
       {
         headers: {
